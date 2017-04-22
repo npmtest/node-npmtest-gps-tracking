@@ -1,0 +1,1285 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-gps-tracking/node_modules/gps-tracking/lib/main.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-gps-tracking">npmtest-gps-tracking (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-gps-tracking/node_modules/gps-tracking/lib/main.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">7.36% <small>(12 / 163)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 40)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 33)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">7.59% <small>(12 / 158)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-gps-tracking/node_modules/gps-tracking/lib/</a> » main.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">util			= require('util');
+EventEmitter	= require('events').EventEmitter;
+net				= require('net');
+extend			= require('node.extend');
+functions		= require('./functions');
+&nbsp;
+util.inherits(Device, EventEmitter);
+util.inherits(server, EventEmitter);
+&nbsp;
+<span class="fstat-no" title="function not covered">function server(opts, callback) {</span>
+<span class="cstat-no" title="statement not covered">	if (!(this instanceof server))</span>
+<span class="cstat-no" title="statement not covered">		return new server(opts, callback);</span>
+<span class="cstat-no" title="statement not covered">	EventEmitter.call(this);</span>
+<span class="cstat-no" title="statement not covered">	var defaults = {</span>
+		debug:						false,
+		port:						8080,
+		device_adapter:				false
+	};
+&nbsp;
+	//Merge default options with user options
+<span class="cstat-no" title="statement not covered">	this.opts = extend(defaults, opts);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	var thisServer = this;</span>
+<span class="cstat-no" title="statement not covered">	this.devices = [];</span>
+<span class="cstat-no" title="statement not covered">	this.db = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.server = false;</span>
+<span class="cstat-no" title="statement not covered">	this.availableAdapters = {</span>
+		TK103:		'./adapters/tk103'
+	};
+&nbsp;
+	/****************************
+	SOME FUNCTIONS
+	*****************************/
+	/* */
+<span class="cstat-no" title="statement not covered">	this.setAdapter = <span class="fstat-no" title="function not covered">function(adapter){</span></span>
+<span class="cstat-no" title="statement not covered">		if (typeof adapter.adapter != 'function')</span>
+<span class="cstat-no" title="statement not covered">			throw 'The adapter needs an adpater() method to start an instance of it';</span>
+<span class="cstat-no" title="statement not covered">		this.device_adapter = adapter;</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.getAdapter = <span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">		return this.device_adapter;</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.addAdaptar = <span class="fstat-no" title="function not covered">function(model, Obj) {</span></span>
+<span class="cstat-no" title="statement not covered">		this.availableAdapters.push(model);</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.init = <span class="fstat-no" title="function not covered">function(cb) {</span></span>
+		//Set debug
+<span class="cstat-no" title="statement not covered">		thisServer.setDebug(this.opts.debug);</span>
+&nbsp;
+		/*****************************
+		DEVICE ADAPTER INITIALIZATION
+		******************************/
+<span class="cstat-no" title="statement not covered">		if (thisServer.opts.device_adapter === false)</span>
+<span class="cstat-no" title="statement not covered">			throw 'The app don\'t set the device_adapter to use. Which model is sending data to this server?';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if (typeof thisServer.opts.device_adapter == 'string') {</span>
+&nbsp;
+			//Check if the selected model has an available adapter registered
+<span class="cstat-no" title="statement not covered">			if (typeof this.availableAdapters[this.opts.device_adapter] == 'undefined')</span>
+<span class="cstat-no" title="statement not covered">				throw 'The class adapter for ' + this.opts.device_adapter + ' doesn\'t exists';</span>
+&nbsp;
+			//Get the adapter
+<span class="cstat-no" title="statement not covered">			var adapterFile = (this.availableAdapters[this.opts.device_adapter]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">			this.setAdapter(require(adapterFile));</span>
+&nbsp;
+		} else {
+			//IF THE APP PASS THE ADEPTER DIRECTLY
+<span class="cstat-no" title="statement not covered">			thisServer.setAdapter(this.opts.device_adapter);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		thisServer.emit('before_init');</span>
+<span class="cstat-no" title="statement not covered">		if (typeof cb == 'function') <span class="cstat-no" title="statement not covered">cb();</span></span>
+<span class="cstat-no" title="statement not covered">		thisServer.emit('init');</span>
+&nbsp;
+		/* FINAL INIT MESSAGE */
+<span class="cstat-no" title="statement not covered">		console.log('\n=================================================\nFRESHWORK GPS LISTENER running at port ' + thisServer.opts.port + '\nEXPECTING DEVICE MODEL:  ' + thisServer.getAdapter().model_name + '\n=================================================\n');</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.addAdaptar = <span class="fstat-no" title="function not covered">function(model,Obj){</span></span>
+<span class="cstat-no" title="statement not covered">		this.adapters.push(model);</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.do_log = <span class="fstat-no" title="function not covered">function (msg,from){</span></span>
+		//If debug is disabled, return false
+<span class="cstat-no" title="statement not covered">		if(this.getDebug() === false)<span class="cstat-no" title="statement not covered">return false;</span></span>
+&nbsp;
+		//If from parameter is not set, default is server.
+<span class="cstat-no" title="statement not covered">		if(typeof(from) == "undefined")<span class="cstat-no" title="statement not covered">from = "SERVER";</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		msg = "#" + from + ": " + msg;</span>
+<span class="cstat-no" title="statement not covered">		console.log(msg);</span>
+&nbsp;
+	};
+&nbsp;
+	/****************************************
+	SOME SETTERS &amp; GETTERS
+	****************************************/
+<span class="cstat-no" title="statement not covered">	this.setDebug = <span class="fstat-no" title="function not covered">function(val){</span></span>
+<span class="cstat-no" title="statement not covered">		this.debug = (val === true);</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.getDebug = <span class="fstat-no" title="function not covered">function(){</span></span>
+<span class="cstat-no" title="statement not covered">		return this.debug;</span>
+	};
+&nbsp;
+&nbsp;
+&nbsp;
+	//Init app
+<span class="cstat-no" title="statement not covered">	this.init(<span class="fstat-no" title="function not covered">function(){</span></span>
+		/*************************************
+		AFTER INITIALIZING THE APP...
+		*************************************/
+<span class="cstat-no" title="statement not covered">		thisServer.server = net.createServer(<span class="fstat-no" title="function not covered">function (connection) {</span></span>
+			//Now we are listening!
+&nbsp;
+			//We create an new device and give the an adapter to parse the incomming messages
+<span class="cstat-no" title="statement not covered">			connection.device = new Device(thisServer.getAdapter(),connection,thisServer);</span>
+<span class="cstat-no" title="statement not covered">			thisServer.devices.push(connection);</span>
+&nbsp;
+&nbsp;
+			//Once we receive data...
+<span class="cstat-no" title="statement not covered">			connection.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+<span class="cstat-no" title="statement not covered">				connection.device.emit("data",data);</span>
+			});
+&nbsp;
+			// Remove the device from the list when it leaves
+<span class="cstat-no" title="statement not covered">			connection.on('end', <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">				thisServer.devices.splice(thisServer.devices.indexOf(connection), 1);</span>
+<span class="cstat-no" title="statement not covered">				connection.device.emit("disconnected");</span>
+			});
+&nbsp;
+<span class="cstat-no" title="statement not covered">			callback(connection.device,connection);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">			connection.device.emit('connected');</span>
+		}).listen(opts.port);
+	});
+&nbsp;
+	/* Search a device by ID */
+<span class="cstat-no" title="statement not covered">	this.find_device = <span class="fstat-no" title="function not covered">function(device_id){</span></span>
+<span class="cstat-no" title="statement not covered">		for(var i in this.devices){</span>
+<span class="cstat-no" title="statement not covered">			var dev = this.devices[i].device;</span>
+<span class="cstat-no" title="statement not covered">			if(dev.uid == device_id)<span class="cstat-no" title="statement not covered">return dev;</span></span>
+		}
+<span class="cstat-no" title="statement not covered">		return false;</span>
+	};
+&nbsp;
+	/* SEND A MESSAGE TO DEVICE ID X */
+<span class="cstat-no" title="statement not covered">	this.send_to = <span class="fstat-no" title="function not covered">function(device_id,msg){</span></span>
+<span class="cstat-no" title="statement not covered">		var dev = this.find_device(device_id);</span>
+<span class="cstat-no" title="statement not covered">		dev.send(msg);</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	return this;</span>
+}
+&nbsp;
+&nbsp;
+&nbsp;
+/*************************************************************
+&nbsp;
+                    THE DEVICE CLASS
+**************************************************************/
+&nbsp;
+<span class="fstat-no" title="function not covered">function Device(adapter,connection,gps_server){</span>
+	/* Inherits EventEmitter class */
+<span class="cstat-no" title="statement not covered">	EventEmitter.call(this);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	var this_device 	= this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.connection 	= connection;</span>
+<span class="cstat-no" title="statement not covered">	this.server 		= gps_server;</span>
+<span class="cstat-no" title="statement not covered">	this.adapter		= adapter.adapter(this);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.uid = false;</span>
+<span class="cstat-no" title="statement not covered">	this.ip = connection.ip;</span>
+<span class="cstat-no" title="statement not covered">	this.port = connection.port;</span>
+<span class="cstat-no" title="statement not covered">	this.name = false;</span>
+<span class="cstat-no" title="statement not covered">	this.loged = false;</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">	init();</span>
+	/* init */
+<span class="fstat-no" title="function not covered">	function init(){</span>
+&nbsp;
+	}
+&nbsp;
+	/****************************************
+	RECEIVING DATA FROM THE DEVICE
+	****************************************/
+<span class="cstat-no" title="statement not covered">	this.on("data",<span class="fstat-no" title="function not covered">function(data) {</span></span>
+<span class="cstat-no" title="statement not covered">		msg_parts = this_device.adapter.parse_data(data);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(this.getUID() === false &amp;&amp; typeof(msg_parts.device_id) == "undefined"){</span>
+<span class="cstat-no" title="statement not covered">			throw "The adapter doesn't return the device_id and is not defined";</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(msg_parts === false) { //something bad happened</span>
+<span class="cstat-no" title="statement not covered">			this_device.do_log("The message (" + data + ") can't be parsed. Discarding...");</span>
+<span class="cstat-no" title="statement not covered">			return;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if(typeof(msg_parts.cmd) == "undefined")<span class="cstat-no" title="statement not covered">throw "The adapter doesn't return the command (cmd) parameter";</span></span>
+&nbsp;
+		//If the UID of the devices it hasn't been setted, do it now.
+<span class="cstat-no" title="statement not covered">		if(this.getUID() === false)</span>
+<span class="cstat-no" title="statement not covered">			this.setUID(msg_parts.device_id);</span>
+&nbsp;
+		/************************************
+		EXECUTE ACTION
+		************************************/
+<span class="cstat-no" title="statement not covered">		this_device.make_action(msg_parts.action,msg_parts);</span>
+	});
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.make_action = <span class="fstat-no" title="function not covered">function(action, msg_parts) {</span></span>
+		//If we're not loged
+<span class="cstat-no" title="statement not covered">		if(action != "login_request" &amp;&amp; !this_device.loged){</span>
+<span class="cstat-no" title="statement not covered">			this_device.adapter.request_login_to_device();</span>
+<span class="cstat-no" title="statement not covered">			console.log(this_device.getUID()+" is trying to '" + action + "' but it isn't loged. Action wasn't executed");</span>
+<span class="cstat-no" title="statement not covered">			return false;</span>
+		}
+<span class="cstat-no" title="statement not covered">		switch(action){</span>
+			case "login_request":
+<span class="cstat-no" title="statement not covered">				this_device.login_request(msg_parts);</span>
+<span class="cstat-no" title="statement not covered">				break;</span>
+			case "ping":
+<span class="cstat-no" title="statement not covered">				this_device.ping(msg_parts);</span>
+<span class="cstat-no" title="statement not covered">				break;</span>
+			case "alarm":
+<span class="cstat-no" title="statement not covered">				this_device.receive_alarm(msg_parts);</span>
+<span class="cstat-no" title="statement not covered">				break;</span>
+			case "other":
+<span class="cstat-no" title="statement not covered">				this_device.adapter.run_other(msg_parts.cmd,msg_parts);</span>
+<span class="cstat-no" title="statement not covered">				break;</span>
+		}
+	};
+&nbsp;
+&nbsp;
+&nbsp;
+	/****************************************
+	LOGIN &amp; LOGOUT
+	****************************************/
+<span class="cstat-no" title="statement not covered">	this.login_request = <span class="fstat-no" title="function not covered">function(msg_parts) {</span></span>
+<span class="cstat-no" title="statement not covered">		this_device.do_log("I'm requesting to be loged.");</span>
+<span class="cstat-no" title="statement not covered">		this_device.emit("login_request",this.getUID(),msg_parts);</span>
+	};
+<span class="cstat-no" title="statement not covered">	this.login_authorized = <span class="fstat-no" title="function not covered">function(val, msg_parts) {</span></span>
+<span class="cstat-no" title="statement not covered">		if(val){</span>
+<span class="cstat-no" title="statement not covered">			this.do_log("Device " + this_device.getUID() + " has been authorized. Welcome!");</span>
+<span class="cstat-no" title="statement not covered">			this.loged = true;</span>
+<span class="cstat-no" title="statement not covered">			this.adapter.authorize(msg_parts);</span>
+		}else{
+<span class="cstat-no" title="statement not covered">			this.do_log("Device " + this_device.getUID() + " not authorized. Login request rejected");</span>
+		}
+	};
+<span class="cstat-no" title="statement not covered">	this.logout = <span class="fstat-no" title="function not covered">function(){</span></span>
+<span class="cstat-no" title="statement not covered">		this.loged = false;</span>
+<span class="cstat-no" title="statement not covered">		this.adapter.logout();</span>
+	};
+&nbsp;
+&nbsp;
+	/****************************************
+	RECEIVING GPS POSITION FROM THE DEVICE
+	****************************************/
+<span class="cstat-no" title="statement not covered">	this.ping = <span class="fstat-no" title="function not covered">function(msg_parts){</span></span>
+<span class="cstat-no" title="statement not covered">		var gps_data = this.adapter.get_ping_data(msg_parts);</span>
+<span class="cstat-no" title="statement not covered">		if(gps_data === false){</span>
+			//Something bad happened
+<span class="cstat-no" title="statement not covered">			this_device.do_log("GPS Data can't be parsed. Discarding packet...");</span>
+<span class="cstat-no" title="statement not covered">			return false;</span>
+		}
+&nbsp;
+		/* Needs:
+		latitude, longitude, time
+		Optionals:
+		orientation, speed, mileage, etc */
+&nbsp;
+<span class="cstat-no" title="statement not covered">		this_device.do_log("Position received ( " + gps_data.latitude + "," + gps_data.longitude + " )");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		gps_data.inserted=new Date();</span>
+<span class="cstat-no" title="statement not covered">		gps_data.from_cmd = msg_parts.cmd;</span>
+<span class="cstat-no" title="statement not covered">		this_device.emit("ping", gps_data);</span>
+&nbsp;
+&nbsp;
+	};
+&nbsp;
+	/****************************************
+	RECEIVING ALARM
+	****************************************/
+<span class="cstat-no" title="statement not covered">	this.receive_alarm = <span class="fstat-no" title="function not covered">function(msg_parts) {</span></span>
+		//We pass the message parts to the adapter and they have to say wich type of alarm it is.
+<span class="cstat-no" title="statement not covered">		var alarm_data = this_device.adapter.receive_alarm(msg_parts);</span>
+		/* Alarm data must return an object with at least:
+		alarm_type: object with this format:
+			{'code':'sos_alarm','msg':'SOS Alarm activated by the driver'}
+		*/
+<span class="cstat-no" title="statement not covered">		this_device.emit("alarm", alarm_data.code, alarm_data, msg_parts);</span>
+	};
+&nbsp;
+&nbsp;
+	/****************************************
+	SET REFRESH TIME
+	****************************************/
+<span class="cstat-no" title="statement not covered">	this.set_refresh_time = <span class="fstat-no" title="function not covered">function(interval, duration) {</span></span>
+<span class="cstat-no" title="statement not covered">		this_device.adapter.set_refresh_time(interval, duration);</span>
+	};
+&nbsp;
+	/* adding methods to the adapter */
+<span class="cstat-no" title="statement not covered">	this.adapter.get_device = <span class="fstat-no" title="function not covered">function(){</span></span>
+<span class="cstat-no" title="statement not covered">		return device;</span>
+	};
+<span class="cstat-no" title="statement not covered">	this.send = <span class="fstat-no" title="function not covered">function(msg){</span></span>
+<span class="cstat-no" title="statement not covered">		this.emit("send_data",msg);</span>
+<span class="cstat-no" title="statement not covered">		this.connection.write(msg);</span>
+<span class="cstat-no" title="statement not covered">		this.do_log("Sending to "+this_device.getUID() + ": " + msg);</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.do_log = <span class="fstat-no" title="function not covered">function (msg){</span></span>
+<span class="cstat-no" title="statement not covered">		this_device.server.do_log(msg,this_device.getUID());</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.send_byte_array = <span class="fstat-no" title="function not covered">function(array){</span></span>
+<span class="cstat-no" title="statement not covered">		this.emit("send_byte_data",array);</span>
+<span class="cstat-no" title="statement not covered">		var buff = new Buffer(array);</span>
+<span class="cstat-no" title="statement not covered">		console.log(buff);</span>
+<span class="cstat-no" title="statement not covered">		this.do_log("Sending to " + this_device.uid + ": &lt;Array: [" + array + "]&gt;");</span>
+	};
+&nbsp;
+	/****************************************
+	SOME SETTERS &amp; GETTERS
+	****************************************/
+<span class="cstat-no" title="statement not covered">	this.getName = <span class="fstat-no" title="function not covered">function(){</span></span>
+<span class="cstat-no" title="statement not covered">		return this.name;</span>
+	};
+<span class="cstat-no" title="statement not covered">	this.setName = <span class="fstat-no" title="function not covered">function(name) {</span></span>
+<span class="cstat-no" title="statement not covered">		this.name = name;</span>
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this.getUID = <span class="fstat-no" title="function not covered">function() {</span></span>
+<span class="cstat-no" title="statement not covered">		return this.uid;</span>
+	};
+<span class="cstat-no" title="statement not covered">	this.setUID = <span class="fstat-no" title="function not covered">function(uid) {</span></span>
+<span class="cstat-no" title="statement not covered">		this.uid = uid;</span>
+	};
+&nbsp;
+}
+&nbsp;
+&nbsp;
+exports.server = server;
+exports.version = require('../package').version;
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 22 2017 06:39:30 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
